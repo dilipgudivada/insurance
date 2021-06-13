@@ -10,8 +10,8 @@ app.use(bodyParser.json());
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'password',
-  database: 'dental'
+  password: 'visM@n123',
+  database: 'insurence'
 });
  
 //connect to database
@@ -152,6 +152,7 @@ app.post('/api/insurance',(req, res) => {
            };
            let sql3 = "INSERT INTO oralsurgerycoverage SET ?";
    query = conn.query(sql3, data3,(err, results) => {
+     console.log("results",results);
     if(err) {
       res.send(JSON.stringify({"status": 400, "error": err, "response": err}));
     } else {
