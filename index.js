@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mysql = require('mysql2');
+const { raw } = require('body-parser');
  
 // parse application/json
 app.use(bodyParser.json());
@@ -11,7 +12,7 @@ const conn = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'password',
-  database: 'dental'
+  database: 'insurance'
 });
  
 //connect to database
@@ -280,6 +281,117 @@ app.delete('/api/insurance/:id',(req, res) => {
         }
         });
       }
+  });
+});
+
+
+app.post('/api/authenticateuser', (req, res) => {
+  console.log(req);
+  let sql = "select * FROM users WHERE UserId='"
+  + req.body.UserId+"' and Password='" + req.body.Password+ "'";
+  console.log(sql)
+  let query = conn.query(sql, (err, results) => {
+    console.log(results);
+    if(err) {
+      res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
+    } else {
+      res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    }
+  });
+});
+
+app.post ('/api/createuser', (req,res) => {
+  let data = {
+    UserId: req.body.UserId,
+    Password: req.body.Password,
+    Gender: req.body.Gender,
+    DOB: req.body.DOB,
+    FirstName: req.body.FirstName,
+    LastName: req.body.LastName,
+    MobileNumber: req.body.MobileNumber,
+    RoleId: req.body.RoleId,
+    EmailAddress: req.body.EmailAddress
+  }
+  let sql = "INSERT INTO users SET ?";
+  let query = conn.query(sql, data, (err, results) => {
+    if(err) {
+      res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
+    } else {
+      res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    }
+  });
+});
+
+
+app.put ('/api/updateuser/:id', (req,res) => {
+  let sql = "UPDATE users SET FirstName='"
+  +req.body.FirstName
+  +"', LastName='"
+  +req.body.LastName
+  +"', DOB='"
+  +req.body.DOB
+  +"', Gender='"
+  +req.body.Gender
+  +"', MobileNumber='"
+  +req.body.MobileNumber
+  +"', RoleId='"
+  +req.body.RoleId
+  +"', EmailAddress='"
+  +req.body.EmailAddress
+  +"' WHERE UserId="+req.params.UserId;
+  let query = conn.query(sql, (err, results) => {
+    if(err) {
+      res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
+    } else {
+      res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    }
+  });
+});
+
+
+app.delete('/api/deleteuser/:id',(req, res) => {
+  let sql = "DELETE FROM users WHERE UserId="+req.params.id+"";
+  let query = conn.query(sql, (err, results) => {
+    if(err) {
+      res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
+    } else {
+      res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    }
+  });
+});
+
+app.get('/api/roles', (req, res) => {
+  let sql = "SELECT * FROM roles";
+  let query = conn.query(sql, (err, results) => {
+    if(err) {
+      res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
+    } else {
+      res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    }
+  });
+});
+
+app.get('/api/users', (req, res) => {
+  let sql = "SELECT * FROM users";
+  let query = conn.query(sql, (err, results) => {
+    if(err) {
+      res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
+    } else {
+      res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    }
+  });
+});
+
+app.put('/api/changepassword', (req, res) => {
+  let sql = "UPDATE users set Password='" +  req.body.NewPassword 
+  +"' WHERE UserId='"+req.body.UserId + "' and Password='" + req.body.OldPassword + "'";
+  console.log(sql)
+  let query = conn.query(sql, (err, results) => {
+    if(err) {
+      res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
+    } else {
+      res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    }
   });
 });
 

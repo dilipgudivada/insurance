@@ -1,4 +1,4 @@
-CREATE TABLE `oralsurgerycoverage` (
+CREATE TABLE `insurance`.`oralsurgerycoverage` (
   `PatientID` varchar(20) DEFAULT NULL,
   `Preventative` varchar(3) DEFAULT NULL,
   `SurgeryCoverage` varchar(3) DEFAULT NULL,
