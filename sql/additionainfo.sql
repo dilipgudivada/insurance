@@ -1,4 +1,4 @@
-CREATE TABLE `additionalinfo` (
+CREATE TABLE `insurance`.`additionalinfo` (
   `FamilyCoverage` varchar(200) DEFAULT NULL,
   `EffectiveDate` varchar(20) DEFAULT NULL,
   `PayorId` varchar(50) DEFAULT NULL,

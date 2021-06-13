@@ -1,4 +1,4 @@
-CREATE TABLE `generalinfo` (
+CREATE TABLE `insurance`.`generalinfo` (
   `PatientID` int DEFAULT NULL,
   `GuestName` varchar(150) DEFAULT NULL,
   `GuestDOB` varchar(20) DEFAULT NULL,

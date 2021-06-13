@@ -1,0 +1,20 @@
+INSERT INTO `insurance`.`users`
+(`UserId`,
+`FirtName`,
+`LastName`,
+`Password`,
+`MobileNumber`,
+`EmailAddress`,
+`Gender`,
+`DOB`,
+`RoleId`)
+VALUES
+('dilip123',
+"dilip",
+"gudivada",
+"password",
+"+919963615705",
+"g4dilip@yahoo.com",
+"Male",
+"17/06/1984",
+1);
