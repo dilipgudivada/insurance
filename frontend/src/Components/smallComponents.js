@@ -1,6 +1,7 @@
 import React from 'react';
 import logoPng from '../images/logoPng.png';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) => ({
 
     logo: {
@@ -25,7 +26,6 @@ button:{
   width: "15%",
   height: "7%",
   position: "absolute",
-  background: "#FFFFFF",
   borderRadius: "27px"
 },
 fontStyle:{
@@ -41,6 +41,9 @@ fontStyle:{
   fontFamily: "Philosopher",
   fontWeight: "bold",
   lineHeight: "34px"
+},
+LoggedInUserInfo:{
+  "position":"fixed","top":"0px","left":"10%"
 }
   
   }));
@@ -57,16 +60,30 @@ export function Underline (position){
      }
   return <div  style={style}  className={classes.underline}></div>
 }
+export function FormHeader(props) {
+  return <h1> {props.UserDialogHeading}</h1>;
+}
+
+export function LoggedInUserInfo(props) {
+  const classes = useStyles();
+  console.log("prosps are herer", props)
+  return <h2 className={classes.LoggedInUserInfo}>Welcome {props.user} !</h2>;
+}
 export function CustomButton (text){
   const classes = useStyles();
-  console.log("textg", text)
+
  
  const style={
-left:text.left
+left:text.left,
+cursor:"pointer"
  }
-  return( <div style={style} className={classes.button}>
-        <span className={classes.fontStyle}>{text.text}</span>
-  </div>);
+  return( 
+    <Button onClick={text.onClick}variant="contained" style={style} className={classes.button} color="primary">
+    {text.text}
+  </Button>
+  );
+  
+
 }
 
 
