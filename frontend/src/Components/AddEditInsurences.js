@@ -29,21 +29,16 @@ const UserDialogHeading ="Add Insurence"
 const [overalldata, setOverAllData] =  React.useState({});
 const [type, setType] =  React.useState("");
 const [url, seturl] =  React.useState("");
-const [checked, setChecked] = React.useState({});
-
-const handleChange = (event) => {
-  setChecked(event.target.checked);
-};
 
 const checkifDPresent=(e)=>{
   let x= false;
   if(e[0][0]==="D"){
-    // console.log("key value pair", e[0].slice(0, 5) )
+
 let methodCode= e[0].slice(0, 5)
 Object.entries(overalldata).map(([key, value], i) =>  {
   
   if(methodCode===key.slice(0, 5)&&(typeof value == "boolean")){
-    console.log("key value pair", key,e[0] )
+ 
     if(value===true){
       console.log("value", value )
       x= true;
@@ -58,7 +53,7 @@ Object.entries(overalldata).map(([key, value], i) =>  {
   else{
     x= true;
   }
-  // console.log("key value pair", e)
+
   return x;
 }
 
@@ -86,10 +81,11 @@ const handlesubmit=()=>{
 }
 
 const handleTextChange = (event) => {
-  console.log("text is updatedsss",event.target.checked)
-  if(typeof event.target.checked == "boolean"){
+  // console.log("text is updatedsss",overalldata)
+  if(event.target.name[0]==="c"){
     
-  setOverAllData({ ...overalldata, [event.target.name]: event.target.checked })
+   var x= event.target.name.substring(1)
+  setOverAllData({ ...overalldata, [x]: event.target.checked })
 
   }
   else{
@@ -106,7 +102,7 @@ const Buttonstyle ={
   "font-size": "16px",
   cursor: "pointer"
 }
-console.log("text is updated",overalldata)
+
   return (
     <div className={classes.root}>
      
@@ -119,11 +115,11 @@ console.log("text is updated",overalldata)
     		return (
           <Grid item xs={3}>
           
-          {value===true||value===false?  
+          {value===true || value===false?  
          
           <FormGroup >
       <FormControlLabel
-        control={<Checkbox checked={value} onChange={handleTextChange} name={key} />}
+        control={<Checkbox checked={value} onChange={handleTextChange} name={"c"+key} />}
         label={key}
       /> </FormGroup>:
         checkifDPresent([key,value])?
