@@ -7,10 +7,105 @@
   pointer-events: none;
 }
 
-.singinContainer{
-
- 
+.login-container {
+  position: absolute;
+  width: 529px;
+  height: 538px;
+  left: 35%;
+  top: 20%;
+  background: #FFFFFF;
+  border-radius: 8px;
 }
+/* from different styles
+
+/* App Container -- start */
+
+.App-container {
+  background-color: #E5E5E5;
+}
+
+
+.btn-login {
+  background: #364153;
+  border-radius: 4px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: #FFFFFF;
+}
+
+.login-container {
+  position: absolute;
+  width: 529px;
+  height: 538px;
+  left: 35%;
+  top: 20%;
+  background: #FFFFFF;
+  border-radius: 8px;
+}
+
+.header-logo {
+  content: url('./images/Logo.svg');
+  position: relative;
+  left: 30px;
+  top: 5px;
+}
+
+.logo-login {
+  margin: 50px 0px;
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.active-menu {
+  font-weight: 500;
+  font-size: 24px;
+  margin-left: 20px;
+  border-bottom: 3px solid #364153;
+}
+
+.nonactive-menu {
+  font-size: 24px;
+  margin-left: 20px;
+}
+
+
+.MuiSvgIcon-root {
+  font-size: 2.5rem !important;
+}
+
+.react-html5-camera-photo>img, .react-html5-camera-photo>video {
+  width: 400px !important;
+  height: 300px;
+  padding: 10px;
+}
+
+.Login-ErrorMessage {
+  color: red;
+}
+
+.MuiDrawer-paperAnchorRight {
+  left: auto;
+  right: 0;
+  width: 500px;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 2px solid #6c757d;
+  width: 100%;
+}
+
+.MuiFormControlLabel-root {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+/*this*/
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

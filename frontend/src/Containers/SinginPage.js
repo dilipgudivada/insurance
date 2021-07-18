@@ -5,7 +5,7 @@ import {Itailogo, Underline,CustomButton} from '../Components/smallComponents';
 import TopDentists2020Opener from "../images/TopDentists2020Opener.png";
 import {SIGNING_TEXT,SIGNUP_TEXT} from '../Constants/generalConstants';
 import {HomePageFooterMenu} from '../Components/HomePageFooterMenu';
-
+import DraggableDialog from '../Components/DraggableDialog';
 function Copyright() {
   return (
     <div >
@@ -43,6 +43,20 @@ heading:{
 }));
 
 export default function SigninPage() {
+  const [open, setOpen] = React.useState(false);
+  const [signin, setSignin] = React.useState(false);
+
+  const handleClickOpen = (value) => {
+
+    setOpen(true);
+    if(value==signin){
+      setSignin(true)
+    }
+    else{
+      setSignin(false)
+    }
+  };
+
   const classes = useStyles();
 const style={
   underline:{
@@ -55,10 +69,16 @@ const style={
     <Itailogo/>
     <Underline/>
     <div className={classes.heading}>INSURANCE VERIFICATION FORM</div>
-            <CustomButton text={SIGNING_TEXT} Color={"white"} />
-            <CustomButton text={SIGNUP_TEXT} Color={"white"} left={"57%"}/>
+            <CustomButton text={SIGNING_TEXT} Color={"white"} onClick={()=>handleClickOpen(signin)} />
+            <CustomButton text={SIGNUP_TEXT} Color={"white"} onClick={()=>handleClickOpen()}left={"57%"}/>
     <Underline top={"88%"}/>
     <HomePageFooterMenu/>
+    <DraggableDialog 
+    open={open}
+    setOpen={setOpen}
+    signin={signin}
+
+    />
     </Container>
     </div>
   );

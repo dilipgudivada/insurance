@@ -15,7 +15,7 @@ fontStyle:{
     float:"left"
 },
 list:{
-    position: "absolute", bottom: "0%", left:"32%"
+    position: "absolute", bottom: "0%", left:"20%"
 }
   }));
 
