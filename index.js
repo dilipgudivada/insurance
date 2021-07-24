@@ -15,7 +15,7 @@ app.use(cors());
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: "visM@n123",
+  password: "password",
   database: "insurance",
 });
  
@@ -601,7 +601,7 @@ app.put('/api/changepassword', (req, res) => {
 });
 
 //Server listening
-app.listen(3000,() =>{
+app.listen(3001,() =>{
   console.log('Server started on port 3000...');
 });
  
