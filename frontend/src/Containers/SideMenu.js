@@ -89,7 +89,7 @@ const handleLogout =() =>{
         
           <MenuIcon onClick={toggleDrawer('left', true) } className={classes.menuicon}/>
           <ExitToAppIcon className={classes.logout} onClick={()=>handleLogout()}/>
-          <LoggedInUserInfo user={props.user.FirtName}/>
+          <LoggedInUserInfo user={props.user.FirstName}/>
           <Itailogo className={classes.logo}/>
           <h1 className={classes.insurenceHeading}>{props.heading}</h1>
           <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>

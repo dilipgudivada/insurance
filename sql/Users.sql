@@ -1,6 +1,6 @@
 CREATE TABLE `insurance`.`users` (
   `UserId` varchar(10) DEFAULT NULL,
-  `FirtName` varchar(100) DEFAULT NULL,
+  `FirstName` varchar(100) DEFAULT NULL,
   `LastName` varchar(100) DEFAULT NULL,
   `Password` varchar(20) DEFAULT NULL,
   `MobileNumber` varchar(20) DEFAULT NULL,

@@ -226,7 +226,7 @@ app.put('/api/insurance/:id',(req, res) => {
   +req.body.RepNo
   +"', FeeSchedule='"
   +req.body.FeeSchedule
-  +"' WHERE PatientID="+req.params.PatientID;
+  +"' WHERE PatientID='"+req.params.id+"'";
   let query = conn.query(sql, (err, results) => {
     if(err)  {
       res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
@@ -283,7 +283,7 @@ app.put('/api/insurance/:id',(req, res) => {
   +req.body.CalendarFiscalDates
   +"', PayorId='"
   +req.body.PayorId
-  +"' WHERE PatientID="+req.params.PatientID;
+  +"' WHERE PatientID='"+req.params.id+"'";
 
   let query2 = conn.query(sql2, (err, results) => {
     if(err)  {
@@ -441,7 +441,7 @@ app.put('/api/insurance/:id',(req, res) => {
       +req.body.D4910PerioMaintLastDos
       +"', DropDownValues='"
       +req.body.DropDownValues
-      +"' WHERE PatientID="+req.params.PatientID;
+      +"' WHERE PatientID='"+req.params.id+"'";
 
       let query3 = conn.query(sql3,(err,results) => {
         if(err) {
@@ -458,17 +458,17 @@ app.put('/api/insurance/:id',(req, res) => {
  
 //Delete product
 app.delete('/api/insurance/:id',(req, res) => {
-  let sql = "DELETE FROM generalinfo WHERE PatientID="+req.params.id+"";
+  let sql = "DELETE FROM generalinfo WHERE PatientID='"+req.params.id+"'";
   let query = conn.query(sql, (err, results) => {
     if(err) {
       res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
     } else {
-      let sql2 = "DELETE FROM additionalinfo WHERE PatientID="+req.params.id+"";
+      let sql2 = "DELETE FROM additionalinfo WHERE PatientID='"+req.params.id+"'";
       let query2 = conn.query(sql2, (err, results) => {
         if(err) {
           res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
         } else {
-          let sql3 = "DELETE FROM oralsurgey WHERE PatientID="+req.params.id+"";
+          let sql3 = "DELETE FROM oralsurgey WHERE PatientID='"+req.params.id+"'";
           let query3 = conn.query(sql3, (err, results) => {
             if(err) {
               res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
@@ -542,7 +542,7 @@ app.put ('/api/updateuser/:id', (req,res) => {
   +req.body.RoleId
   +"', EmailAddress='"
   +req.body.EmailAddress
-  +"' WHERE UserId="+req.params.UserId;
+  +"' WHERE UserId='"+req.params.id+"'";
   let query = conn.query(sql, (err, results) => {
     console.log("ress",results)
     if(err) {

@@ -37,7 +37,7 @@ React.useEffect(() => {
   if(props.props.EditUser){
     setType("put");
     
-    seturl("api/updateuser/:"+props.props.allUsers.UserId);
+    seturl("api/updateuser/"+props.props.allUsers.UserId);
   }
   else{
     setType("post");

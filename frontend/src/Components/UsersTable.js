@@ -14,8 +14,8 @@ import FullScreenDialog from './FullScreenDialog';
 const columns = [
   { id: 'UserId', label: 'UserId', minWidth: 170 },
   {
-    id: 'FirtName',
-    label: 'FirtName',
+    id: 'FirstName',
+    label: 'FirstName',
     minWidth: 170,
     align: 'right',
     format: (value) => value.toLocaleString('en-US'),
@@ -65,9 +65,9 @@ const columns = [
   
 ];
 
-function createData(UserId, FirtName, LastName,MobileNumber,EmailAddress,Gender,Age,Role) {
+function createData(UserId, FirstName, LastName,MobileNumber,EmailAddress,Gender,Age,Role) {
   
-  return {UserId, FirtName, LastName,MobileNumber,EmailAddress,Gender,Age,Role};
+  return {UserId, FirstName, LastName,MobileNumber,EmailAddress,Gender,Age,Role};
 }
 
 // const rows = [
@@ -112,7 +112,7 @@ export default function UsersTable(props) {
   const [emptyDataFields, setemptyDataFields] = React.useState({
     
       "UserId": null,
-      "FirtName": null,
+      "FirstName": null,
       "LastName": null,
       "Password": null,
       "MobileNumber": null,
@@ -129,7 +129,9 @@ export default function UsersTable(props) {
     setOpen(false);
     setselectedRow({})
     setisRowSelected(false);
+    props.setUpdatePage(!props.updatePage)
   };
+ 
   const rows = props.allUsers.allUsers
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

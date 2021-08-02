@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     width: "94%",
     height: "3px",
     position: "absolute",
-    background: "#FFFFFF"
+    background: "#e5e5e7"
   },
 button:{
    top: "50%",
@@ -56,7 +56,7 @@ export function Itailogo(size) {
 export function Underline (position){
   const classes = useStyles();
   const style={
-    top:position.top
+    top:position.top,
      }
   return <div  style={style}  className={classes.underline}></div>
 }

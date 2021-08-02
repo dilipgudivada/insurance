@@ -9,7 +9,7 @@ async function postService( url, type, data ) {
       body:data ,
       opts: {
         headers: {
-          Accept: 'application/json',
+          "Accept": "application/json",
           'Content-Type': 'application/json',
         },
       },
@@ -21,7 +21,7 @@ async function postService( url, type, data ) {
       body:data ,
       opts: {
         headers: {
-          Accept: 'application/json',
+          "Accept": 'application/json',
           'Content-Type': 'application/json',
         },
       },
