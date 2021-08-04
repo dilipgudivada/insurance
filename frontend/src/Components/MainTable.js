@@ -91,13 +91,7 @@ const columns = [
     align: 'right',
     format: (value) => value.toFixed(2),
   },
-  {
-    id: 'RepNo',
-    label: 'RepNo',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
+
   
 ];
 
@@ -145,7 +139,7 @@ const useStyles = makeStyles({
 });
 
 export default function MainTable(props) {
-  console.log(props,"props")
+
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -160,6 +154,9 @@ export default function MainTable(props) {
     "InsuredSSN": null,
     "InsuredID": null,
     "GroupNumber": null,
+    "Preventative": null,
+    "SurgeryCoverage": null,
+    "BasicFillings": null,
     "InsuredEmployer": null,
     "InsCompanyNo": null,
     "InsCompany": null,
@@ -191,32 +188,29 @@ export default function MainTable(props) {
     "OrthoPaidBy": null,
     "WorkInProgress": null,
     "BandingIntialPymt": null,
+    "D6057": null,
     "Notes": null,
     "VerifiedBy": null,
     "VerifiedDate": null,
-    "Preventative": null,
-    "SurgeryCoverage": null,
-    "BasicFillings": null,
-    "D6057": false,
-    "D6104": false,
+    "D6104": null,
     "EndoRootCanals": null,
-    "D6056": false,
-    "D4263": false,
+    "D6056": null,
+    "D4263": null,
     "Periodontics": null,
-    "D6061": false,
-    "D4264": false,
+    "D6061": null,
+    "D4264": null,
     "OralSurgeryExtractions": null,
     "SurgExt": null,
     "SimpleExt": null,
     "Major": null,
-    "D6065": false,
-    "D4266": false,
+    "D6065": null,
+    "D4266": null,
     "CrownsD2740": null,
-    "D6010": false,
-    "D7951": false,
+    "D6010": null,
+    "D7951": null,
     "Bridges": null,
-    "D7311": false,
-    "D7952": false,
+    "D7311": null,
+    "D7952": null,
     "Denbures": null,
     "FileOralSurg": null,
     "ImplantsD6058": null,
@@ -270,7 +264,8 @@ export default function MainTable(props) {
     "D4910PerioMaintAddEither": null,
     "D4910PerioMaintLastDos": null,
     "DropDownValues": null
-  });
+  }
+);
   const [selectedRow, setselectedRow] = React.useState({});
   const rows = props.allInsurances.allInsurances
   const handleChangePage = (event, newPage) => {
@@ -290,9 +285,10 @@ export default function MainTable(props) {
     setOpen(false);
     setselectedRow({});
     setisRowSelected(false);
+    props.setUpdatePage(!props.updatePage)
   };
   const onRowClcik=(row)=>{
- 
+
     setselectedRow(row);
     setOpen(true);
     setisRowSelected(true);

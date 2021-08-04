@@ -1,6 +1,6 @@
 INSERT INTO `insurance`.`users`
 (`UserId`,
-`FirtName`,
+`FirstName`,
 `LastName`,
 `Password`,
 `MobileNumber`,

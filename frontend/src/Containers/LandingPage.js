@@ -7,15 +7,16 @@ export default function LandingPage(userDetails) {
   const style = {
     height: "100%",
     width:"100%",
-    "margin-left": "0%",
-    "margin-right": "0%",
-    "padding-left": "0px",
-    "padding-right": "0px",
+    "marginLeft": "0%",
+    "marginRight": "0%",
+    "paddingLeft": "0px",
+    "paddingRight": "0px",
     "backgroundImage": "linear-gradient(269.7deg, #01ADD5 0.26%, #005775 99.4%)",
-    "min-height": "781px"
+    "minHeight": "781px"
   };
   const [menu, setMenu] = React.useState("Insurance");
   const [user, setuserDetails] = React.useState({});
+  const [updatePage, setUpdatePage] = React.useState(false);
   const [allUsers,setallUsers] = React.useState({
     allUsers: [],
     usersErrorMessage: "",
@@ -33,7 +34,7 @@ export default function LandingPage(userDetails) {
     getInsurences();
     getUsers();
     
-  }, []);
+  }, [updatePage]);
 
   const getUsers = () => {
     var url = GET_USERS;
@@ -96,7 +97,7 @@ export default function LandingPage(userDetails) {
   return (
     <div style={style}>
         <SideMenu user={user} handleMenu={handleMenu}   heading ={menu}/>
-        {menu==="USERS"?<UsersTable user={user} allUsers={allUsers}/>:<MainTable user={user} allInsurances={allInsurances}/>}
+        {menu==="USERS"?<UsersTable setUpdatePage={setUpdatePage} updatePage={updatePage} user={user} allUsers={allUsers}/>:<MainTable  setUpdatePage={setUpdatePage} updatePage={updatePage} user={user} allInsurances={allInsurances}/>}
     </div>
   );
 }

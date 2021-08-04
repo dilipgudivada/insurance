@@ -7,20 +7,8 @@ import {
 import Container from '@material-ui/core/Container';
 import SigninPage from './Containers/SinginPage';
 import LandingPage from './Containers/LandingPage';
-import MenuIcon from '@material-ui/icons/Menu';
-import { common } from '@material-ui/core/colors';
-import ViewportProvider from './_hooks';
 export default function App() {
-  const style = {
-    menuicon:{
-      position:"fixed",
-      padding:"25px",
-      "font-size": "1.7875rem",
-      color: common.white,
-
-    }
-
-  };
+  
 
 let isLoggedIn=localStorage.getItem('isUserLoggedIn')?Landing:Home
 
@@ -39,10 +27,10 @@ function Home() {
   const style = {
     height: "100%",
     width:"100%",
-    "margin-left": "0%",
-    "margin-right": "0%",
-    "padding-left": "0px",
-    "padding-right": "0px",
+    "marginLeft": "0%",
+    "marginRight": "0%",
+    "paddingLeft": "0px",
+    "paddingRight": "0px",
     "backgroundImage": "linear-gradient(269.7deg, #01ADD5 0.26%, #005775 99.4%)"
   };
   console.log("home page being called");
@@ -55,10 +43,10 @@ function Landing() {
   const style = {
     height: "100%",
     width:"100%",
-    "margin-left": "0%",
-    "margin-right": "0%",
-    "padding-left": "0px",
-    "padding-right": "0px",
+    "marginLeft": "0%",
+    "marginRight": "0%",
+    "paddingLeft": "0px",
+    "paddingRight": "0px",
     "backgroundImage": "linear-gradient(269.7deg, #01ADD5 0.26%, #005775 99.4%)"
   };
   

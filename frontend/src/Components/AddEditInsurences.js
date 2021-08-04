@@ -1,7 +1,6 @@
 //add code for form to add user here  
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import {FormHeader} from './smallComponents';
 import TextField from '@material-ui/core/TextField';
@@ -25,19 +24,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddEditInsurences(props) {
   const classes = useStyles();
-const UserDialogHeading ="Add Insurence"
 const [overalldata, setOverAllData] =  React.useState({});
 const [type, setType] =  React.useState("");
 const [url, seturl] =  React.useState("");
-
 const checkifDPresent=(e)=>{
   let x= false;
   if(e[0][0]==="D"){
 
 let methodCode= e[0].slice(0, 5)
 Object.entries(overalldata).map(([key, value], i) =>  {
+ 
   
-  if(methodCode===key.slice(0, 5)&&(typeof value == "boolean")){
+  if(methodCode===key.slice(0, 5)&&(typeof value === "boolean")){
  
     if(value===true){
       console.log("value", value )
@@ -60,39 +58,38 @@ Object.entries(overalldata).map(([key, value], i) =>  {
 
 React.useEffect(() => {
  
-  setOverAllData(props.allInsurances.allInsurances);
-   Object.entries(props.allInsurances.allInsurances).map(([key, value], i) =>  {
-
-  })
+  setOverAllData(props.someInsurances);
+ console.log("props coming to add edit insurence", props)
   if(props.allInsurances.EditInsurance){
     setType("put");
-    seturl("api/insurance/:"+props.allInsurances.allInsurances.PatientID);
+    seturl("api/insurance/"+props.finalInsurenceToSend.PatientID);
   }
   else{
     setType("post");
     seturl("api/insurance")
   }
 
-}, []);
+}, [props.finalInsurenceToSend]);
 const handlesubmit=()=>{
+  console.log("props.finalInsurenceToSend",props.finalInsurenceToSend)
   ServiceCall
-  .postService(url, type, overalldata )
+  .postService(url, type, props.finalInsurenceToSend )
   .then((data) => alert(data));
 }
 
-const handleTextChange = (event) => {
-  // console.log("text is updatedsss",overalldata)
-  if(event.target.name[0]==="c"){
+// const handleTextChange = (event) => {
+//    console.log("text is updatedsss",overalldata)
+//   if(event.target.name[0]==="c"){
     
-   var x= event.target.name.substring(1)
-  setOverAllData({ ...overalldata, [x]: event.target.checked })
+//    var x= event.target.name.substring(1)
+//   setOverAllData({ ...overalldata, [x]: event.target.checked })
 
-  }
-  else{
-setOverAllData({ ...overalldata, [event.target.name]: event.target.value });
-  }
+//   }
+//   else{
+// setOverAllData({ ...overalldata, [event.target.name]: event.target.value });
+//   }
   
-};
+// };
 
 const Buttonstyle ={
   position: "fixed",
@@ -106,7 +103,7 @@ const Buttonstyle ={
   return (
     <div className={classes.root}>
      
- {props.allInsurances.EditInsurance? <FormHeader UserDialogHeading={"Edit Insurance"}/>:<FormHeader UserDialogHeading={"Add Insurance"}/>}
+ {/* {props.allInsurances.EditInsurance? <FormHeader UserDialogHeading={"Edit Insurance"}/>:<FormHeader UserDialogHeading={"Add Insurance"}/>} */}
      
     <Button style={Buttonstyle}  primary onClick= {handlesubmit}>submit</Button>
       { props.allInsurances.allInsurances  ?  
@@ -119,7 +116,7 @@ const Buttonstyle ={
          
           <FormGroup >
       <FormControlLabel
-        control={<Checkbox checked={value} onChange={handleTextChange} name={"c"+key} />}
+        control={<Checkbox checked={value} onChange={props.handleTextChange} name={"c"+key} />}
         label={key}
       /> </FormGroup>:
         checkifDPresent([key,value])?
@@ -128,7 +125,7 @@ const Buttonstyle ={
       name={key}
       label={key}
       defaultValue={value}
-      onChange={handleTextChange}
+      onChange={props.handleTextChange}
       variant="outlined" />
       </form>:null
     
