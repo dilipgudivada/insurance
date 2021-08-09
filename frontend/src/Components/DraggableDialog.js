@@ -31,20 +31,18 @@ export default function DraggableDialog(props) {
         PaperComponent={PaperComponent}
         aria-labelledby="draggable-dialog-title"
       >
-        
+
         <DialogContent>
-           
-            
 
-
-            {props.signin?<div>
-            <Login/></div>:<div>This page is under construction</div>}
+          {props.signin ? <div>
+            <Login handleClose={handleClose}/></div> : <div>This page is under construction</div>}
         </DialogContent>
+        {!props.signin &&
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
             Cancel
           </Button>
-        </DialogActions>
+        </DialogActions>}
       </Dialog>
     </div>
   );

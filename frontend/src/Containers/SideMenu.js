@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import {Itailogo,LoggedInUserInfo } from '../Components/smallComponents';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
   list: {
@@ -24,15 +25,14 @@ const useStyles = makeStyles({
   },  
   menuicon:{
     margin: "16px",
-   
+    color: "white",
+    fontSize: 36
   },
   insurenceHeading:{
-    float: "right",
-    /* align-content: center; */
-    // position: "absolute",
-    // top: "1%",
-    // left: "44%",
-    "padding-right":"10%"
+    position: "absolute",
+    top: -10,
+    left: 80,
+    color: "white"
   },
   logo:{
     top:"0% !importent" 
@@ -52,14 +52,14 @@ export default function SideMenu(props) {
   });
 const handleLogout =() =>{
   localStorage.setItem("isUserLoggedIn", false);
+  window.location.href = '/';
 }
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
 
-    setState({ ...state, [anchor]: open });
-  };
+    setState({ ...state, [anchor]: open });  };
   
 
   const list = (anchor) => (
@@ -72,12 +72,20 @@ const handleLogout =() =>{
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Users', 'Insurences'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <PeopleIcon onClick={()=>props.handleMenu("USERS")}/> : <AssignmentIcon onClick={()=>props.handleMenu("Insurance")}/>}</ListItemIcon>
+        <ListItem>
+        <Itailogo />
+        </ListItem>
+        <hr/>
+        {['Users', 'Insurance'].map((text) => (
+          <ListItem button key={text} onClick={()=>props.handleMenu(text)}>
+            <ListItemIcon>{text.toUpperCase() === 'USERS' ? <PeopleIcon /> : <AssignmentIcon/>}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
+        <ListItem button onClick={()=>handleLogout()}>
+        <ListItemIcon><ExitToAppIcon/></ListItemIcon>
+        <ListItemText primary={"Logout"} />
+        </ListItem>
       </List>
       
     </div>
@@ -88,9 +96,9 @@ const handleLogout =() =>{
         <React.Fragment >
         
           <MenuIcon onClick={toggleDrawer('left', true) } className={classes.menuicon}/>
-          <ExitToAppIcon className={classes.logout} onClick={()=>handleLogout()}/>
-          <LoggedInUserInfo user={props.user.FirstName}/>
-          <Itailogo className={classes.logo}/>
+          {/* <ExitToAppIcon className={classes.logout} onClick={()=>handleLogout()}/> */}
+          {/* <LoggedInUserInfo user={props.user.FirstName}/> */}
+          
           <h1 className={classes.insurenceHeading}>{props.heading}</h1>
           <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
             {list('left')}

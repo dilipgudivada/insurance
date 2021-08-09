@@ -1,16 +1,19 @@
 import React from 'react';
-import logoPng from '../images/logoPng.png';
+import logoPng from '../images/logo.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) => ({
 
     logo: {
       content: `url(${logoPng})`,
-      top: "3%",
-  left: "44%",
-  width: "83px",
-  height: "83px",
-  position: "absolute"
+      width: "200px",
+      height: "120px",
+
+  },
+  signInLogo: {
+    content: `url(${logoPng})`,
+    width: '400px',
+    height: '400px',
   },
   underline:{
     top: "21%",
@@ -21,12 +24,10 @@ const useStyles = makeStyles((theme) => ({
     background: "#e5e5e7"
   },
 button:{
-   top: "50%",
-   left: "35%",
-  width: "15%",
-  height: "7%",
+  borderRadius: "27px",
   position: "absolute",
-  borderRadius: "27px"
+    top: "50%",
+    width: "400px"
 },
 fontStyle:{
   top: "11%",
@@ -49,14 +50,19 @@ LoggedInUserInfo:{
   }));
 
 
-export function Itailogo(size) {
+export function Itailogo() {
   const classes = useStyles();
   return <div className={classes.logo} ></div>;
+}
+
+export function SignInLogo() {
+  const classes = useStyles();
+  return <div className={classes.signInlogo} ></div>;
 }
 export function Underline (position){
   const classes = useStyles();
   const style={
-    top:position.top,
+      color: 'green'
      }
   return <div  style={style}  className={classes.underline}></div>
 }
@@ -72,13 +78,8 @@ export function LoggedInUserInfo(props) {
 export function CustomButton (text){
   const classes = useStyles();
 
- 
- const style={
-left:text.left,
-cursor:"pointer"
- }
   return( 
-    <Button onClick={text.onClick}variant="contained" style={style} className={classes.button} color="primary">
+    <Button onClick={text.onClick}variant="contained"  className={classes.button} color="primary">
     {text.text}
   </Button>
   );

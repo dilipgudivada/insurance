@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
+    margin: theme.spacing(2, 0, 2, 0),
   },
 }));
 
@@ -104,12 +104,9 @@ const Login = (props) => {
 <Container component="main" maxWidth="xs">
 <CssBaseline />
 <div className={classes.paper}>
-  <Avatar className={classes.avatar}>
- 
-    <Itailogo/>
-  </Avatar>
+
   <Typography component="h1" variant="h5">
-    Sign in
+    SIGN IN
   </Typography>
   <form className={classes.form} noValidate>
     <TextField
@@ -137,10 +134,6 @@ const Login = (props) => {
       autoComplete="current-password"
       onChange={handleChange}
     />
-    <FormControlLabel
-      control={<Checkbox value="remember" color="primary" />}
-      label="Remember me"
-    />
     <Button
       type='button'
       fullWidth
@@ -151,27 +144,20 @@ const Login = (props) => {
     >
       Sign In
     </Button>
-    <Grid container>
-      <Grid item xs>
-        <Link href="#" variant="body2">
-          Forgot password?
-        </Link>
-      </Grid>
-      <Grid item>
-        <Link href="#" variant="body2">
-          {"Don't have an account? Sign Up"}
-        </Link>
-      </Grid>
-    </Grid>
+
+    <Button
+    type='button'
+    fullWidth
+    variant="contained"
+    color="danger"
+    className={classes.submit}
+    onClick={props.handleClose}>
+            Cancel
+          </Button>
   </form>
 </div>
 {values.isError ? <span className = "Login-ErrorMessage">{values.errorMessage}</span>: ""}
-<Box mt={8}>
-  <Copyright />
-</Box>
 </Container>
-
-
   );
 };
 export default Login;

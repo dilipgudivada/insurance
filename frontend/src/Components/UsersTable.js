@@ -12,54 +12,47 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import FullScreenDialog from './FullScreenDialog';
 
 const columns = [
-  { id: 'UserId', label: 'UserId', minWidth: 170 },
+  { id: 'UserId', label: 'UserId', align: 'left' },
   {
     id: 'FirstName',
     label: 'FirstName',
-    minWidth: 170,
-    align: 'right',
+    align: 'left',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'LastName',
     label: 'LastName',
-    minWidth: 170,
-    align: 'right',
+    align: 'left',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'MobileNumber',
     label: 'MobileNumber',
-    minWidth: 170,
-    align: 'right',
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'EmailAddress',
     label: 'EmailAddress',
-    minWidth: 170,
-    align: 'right',
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'Gender',
     label: 'Gender',
-    minWidth: 170,
-    align: 'right',
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'Age',
     label: 'Age',
-    minWidth: 170,
-    align: 'right',
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'Role',
     label: 'Role',
-    minWidth: 170,
-    align: 'right',
+    align: 'left',
     format: (value) => value.toFixed(2),
   }
   
@@ -70,32 +63,10 @@ function createData(UserId, FirstName, LastName,MobileNumber,EmailAddress,Gender
   return {UserId, FirstName, LastName,MobileNumber,EmailAddress,Gender,Age,Role};
 }
 
-// const rows = [
-//   createData('parver', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('dilip', 'kumar', 'ji', 3287263,'parvez.mail@gmail.com','male',29,'Faculty'),
-//   createData('dilp123', 'dil', 'ip', 3287263,'parvez.mail@gmail.com','male',29,'Doctor'),
-//   createData('vinay', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('noor', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('parver', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('parver', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('parver', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('parver', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('parver', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('parver', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('parver', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('parver', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('parver', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-//   createData('parver', 'parvez', 'Hussain', 3287263,'parvez.mail@gmail.com','male',29,'Admin'),
-  
-  
-// ];
-
 const useStyles = makeStyles({
   root: {
-    width: '94%',
-    position:"relative",
-    left:"3%",
-    background:"rgba(0, 151, 19, 0.1)"
+    width: '100%',
+    minHeight: 500,
   },
   container: {
     maxHeight: "100%",
@@ -181,9 +152,10 @@ const onRowClcik=(row)=>{
               );
             })}
           </TableBody>
+          
         </Table>
-      </TableContainer>
-      <TablePagination
+        <TablePagination
+        style={{ position: 'relative', bottom : 0}}
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
@@ -192,10 +164,12 @@ const onRowClcik=(row)=>{
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
+      </TableContainer>
+    
       <AddCircleIcon style={{ 
-        fontSize: 60,
+        fontSize: 50,
          position:"fixed",
-    top:"2%",
+    bottom:"10%",
     left:"93%",
     }} color="primary" className={classes.addIcon}
     onClick={()=>handleClickOpen()}/>

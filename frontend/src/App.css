@@ -87,10 +87,11 @@
   color: red;
 }
 
-.MuiDrawer-paperAnchorRight {
+.MuiDrawer-paperAnchorLeft {
   left: auto;
   right: 0;
   width: 500px;
+  background-color:#8dd7e8;
 }
 
 hr {

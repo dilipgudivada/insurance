@@ -17,78 +17,78 @@ const columns = [
   {
     id: 'GuestDOB',
     label: 'GuestDOB',
-    minWidth: 170,
-    align: 'right',
+    
+    align: 'left',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'InsuredName',
     label: 'InsuredDOB',
-    minWidth: 170,
-    align: 'right',
+    
+    align: 'left',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'InsuredSSN',
     label: 'InsuredSSN',
-    minWidth: 170,
-    align: 'right',
+    
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'InsuredID',
     label: 'InsuredID',
-    minWidth: 170,
-    align: 'right',
+    
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'GroupNumber',
     label: 'GroupNumber',
-    minWidth: 170,
-    align: 'right',
+    
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'InsuredEmployer',
     label: 'InsuredEmployer',
-    minWidth: 170,
-    align: 'right',
+    
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'InsCompanyNo',
     label: 'InsCompanyNo',
-    minWidth: 170,
-    align: 'right',
+    
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'InsCompany',
     label: 'InsCompany',
-    minWidth: 170,
-    align: 'right',
+    
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'InsCompAddress',
     label: 'InsCompAddress',
-    minWidth: 170,
-    align: 'right',
+    
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'InsRep',
     label: 'InsRep',
-    minWidth: 170,
-    align: 'right',
+    
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
   {
     id: 'RepNo',
     label: 'RepNo',
-    minWidth: 170,
-    align: 'right',
+    
+    align: 'left',
     format: (value) => value.toFixed(2),
   },
 
@@ -102,35 +102,14 @@ function createData(PatientID,GuestName,GuestDOB,InsuredName,InsuredDOB,InsuredS
   };
 }
 
-// const rows = [
-//   createData(1009, 'parvez', "25/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1008, 'dilip', "2/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1007, 'naushad', "3/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1006, 'dwight', "4/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1005, 'jim', "2/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1004, 'pam', "6/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1003, 'kavin', "23/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1002, 'stanly', "1/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1001, 'godra', "23/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1019, 'goku', "25/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1029, 'darthVador', "7/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1039, 'starlord', "21/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
-//   createData(1049, 'stark', "9/09/1992", " naushad Hussain","05/12/1968",155668,115586,1566,"libarty",123, "libarty general isurence",'Dunder Mifflin Scranton office',"dilip" ),
- 
-// ];
-
 const useStyles = makeStyles({
   root: {
-    width: '94%',
-    position:"relative",
-    left:"3%",
-    background:"rgba(0, 151, 19, 0.1)"
+    width: '100%',
+    minHeight: 500,
   },
   container: {
     maxHeight: "100%",
-    
   },
-  
   addIcon:{
     position:"fixed",
     bottom:"10%",
@@ -339,9 +318,9 @@ export default function MainTable(props) {
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
       <AddCircleIcon style={{ 
-        fontSize: 60,
+        fontSize: 50,
          position:"fixed",
-         top:"2%",
+         bottom:"10%",
          left:"93%",
     }} color="primary" className={classes.addIcon}
     onClick={()=>handleClickOpen()}/>

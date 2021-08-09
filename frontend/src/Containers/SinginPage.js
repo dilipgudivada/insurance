@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Itailogo, Underline,CustomButton} from '../Components/smallComponents';
+import {Itailogo, Underline,CustomButton, SignInLogo} from '../Components/smallComponents';
 import TopDentists2020Opener from "../images/TopDentists2020Opener.png";
 import {SIGNING_TEXT,SIGNUP_TEXT} from '../Constants/generalConstants';
 import {HomePageFooterMenu} from '../Components/HomePageFooterMenu';
@@ -66,19 +66,17 @@ const style={
   return (
     <div className={classes.singinContainer}>
     <Container maxWidth="xs" >
-    <Itailogo/>
-    <Underline/>
-    <div className={classes.heading}>INSURANCE VERIFICATION FORM</div>
-            <CustomButton text={SIGNING_TEXT} Color={"white"} onClick={()=>handleClickOpen(signin)} />
-            <CustomButton text={SIGNUP_TEXT} Color={"white"} onClick={()=>handleClickOpen()}left={"57%"}/>
-    <Underline top={"88%"}/>
-    <HomePageFooterMenu/>
     <DraggableDialog 
     open={open}
     setOpen={setOpen}
     signin={signin}
 
     />
+    {/* <SignInLogo/>
+    <Underline/> */}
+    <div className={classes.heading}>INSURANCE VERIFICATION FORM</div>
+    <CustomButton text={SIGNING_TEXT} Color={"white"} onClick={()=>handleClickOpen(signin)} />
+    {/* <Underline /> */}
     </Container>
     </div>
   );

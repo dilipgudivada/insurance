@@ -86,7 +86,7 @@ export default function LandingPage(userDetails) {
 
   const handleMenu = (value) => {
     
-    if(value=="Insurance"){
+    if(value.toUpperCase() ==="INSURANCE"){
       setMenu("Insurance")
     }
     else{
@@ -97,7 +97,7 @@ export default function LandingPage(userDetails) {
   return (
     <div style={style}>
         <SideMenu user={user} handleMenu={handleMenu}   heading ={menu}/>
-        {menu==="USERS"?<UsersTable setUpdatePage={setUpdatePage} updatePage={updatePage} user={user} allUsers={allUsers}/>:<MainTable  setUpdatePage={setUpdatePage} updatePage={updatePage} user={user} allInsurances={allInsurances}/>}
+        {menu.toUpperCase()==="USERS"?<UsersTable setUpdatePage={setUpdatePage} updatePage={updatePage} user={user} allUsers={allUsers}/>:<MainTable  setUpdatePage={setUpdatePage} updatePage={updatePage} user={user} allInsurances={allInsurances}/>}
     </div>
   );
 }
