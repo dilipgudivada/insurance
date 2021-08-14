@@ -110,11 +110,6 @@ const useStyles = makeStyles({
   container: {
     maxHeight: "100%",
   },
-  addIcon:{
-    position:"fixed",
-    bottom:"10%",
-    left:"10%"
-  }
 });
 
 export default function MainTable(props) {
@@ -322,7 +317,8 @@ export default function MainTable(props) {
          position:"fixed",
          bottom:"10%",
          left:"93%",
-    }} color="primary" className={classes.addIcon}
+         color:"#3f9fb5"
+    }}  
     onClick={()=>handleClickOpen()}/>
     {isRowSelected?<FullScreenDialog open={open} handleClose={handleClose} allInsurances={selectedRow} EditInsurance={isRowSelected}/>:
     <FullScreenDialog open={open} handleClose={handleClose} allInsurances={emptyDataFields} EditInsurance={isRowSelected}/>}

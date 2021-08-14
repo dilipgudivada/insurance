@@ -11,6 +11,16 @@ import TableRow from '@material-ui/core/TableRow';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import FullScreenDialog from './FullScreenDialog';
 
+
+
+function roleName(value) {
+  const  roles = [{id: 1, roleName: "Admin"}, {id:2, roleName: "Dental Office"}, { id: 3, roleName: 'Agent'}];
+  roles.forEach((item) => {
+    if(item.id.toString() === value.toString()) {
+      return <div>{item.roleName}</div>;
+    }
+  });
+}
 const columns = [
   { id: 'UserId', label: 'UserId', align: 'left' },
   {
@@ -44,16 +54,10 @@ const columns = [
     format: (value) => value.toFixed(2),
   },
   {
-    id: 'Age',
-    label: 'Age',
-    align: 'left',
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: 'Role',
+    id: 'RoleId',
     label: 'Role',
     align: 'left',
-    format: (value) => value.toFixed(2),
+    format: (value) => roleName(value),
   }
   
 ];
@@ -156,7 +160,7 @@ const onRowClcik=(row)=>{
         </Table>
         <TablePagination
         style={{ position: 'relative', bottom : 0}}
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsnPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
@@ -171,7 +175,8 @@ const onRowClcik=(row)=>{
          position:"fixed",
     bottom:"10%",
     left:"93%",
-    }} color="primary" className={classes.addIcon}
+    color:"#3f9fb5"
+    }}
     onClick={()=>handleClickOpen()}/>
     {isRowSelected?<FullScreenDialog open={open} handleClose={handleClose} allUsers={selectedRow} EditUser= {isRowSelected}/>:
     <FullScreenDialog open={open} handleClose={handleClose} allUsers={emptyDataFields} EditUser ={isRowSelected}/>}

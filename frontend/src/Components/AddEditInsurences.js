@@ -2,14 +2,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import {FormHeader} from './smallComponents';
 import TextField from '@material-ui/core/TextField';
 import {ServiceCall} from '../Services/Services';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
+import SaveIcon from '@material-ui/icons/Save';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,41 +70,18 @@ React.useEffect(() => {
 
 }, [props.finalInsurenceToSend]);
 const handlesubmit=()=>{
-  console.log("props.finalInsurenceToSend",props.finalInsurenceToSend)
   ServiceCall
   .postService(url, type, props.finalInsurenceToSend )
   .then((data) => alert(data));
 }
 
-// const handleTextChange = (event) => {
-//    console.log("text is updatedsss",overalldata)
-//   if(event.target.name[0]==="c"){
-    
-//    var x= event.target.name.substring(1)
-//   setOverAllData({ ...overalldata, [x]: event.target.checked })
 
-//   }
-//   else{
-// setOverAllData({ ...overalldata, [event.target.name]: event.target.value });
-//   }
-  
-// };
 
-const Buttonstyle ={
-  position: "fixed",
-  bottom: "10%",
-  left: "90%",
-  "background-color": "#3f51b5",
-  "font-size": "16px",
-  cursor: "pointer"
-}
+
 
   return (
-    <div className={classes.root}>
-     
- {/* {props.allInsurances.EditInsurance? <FormHeader UserDialogHeading={"Edit Insurance"}/>:<FormHeader UserDialogHeading={"Add Insurance"}/>} */}
-     
-    <Button style={Buttonstyle}  primary onClick= {handlesubmit}>submit</Button>
+    <div className={classes.root}>     
+    
       { props.allInsurances.allInsurances  ?  
       <Grid container spacing={3}> 
       {Object.entries(overalldata).map(([key, value], i) =>  {
@@ -128,10 +104,6 @@ const Buttonstyle ={
       onChange={props.handleTextChange}
       variant="outlined" />
       </form>:null
-    
-
-    
-      
     }
           </Grid>
     		)
@@ -141,7 +113,11 @@ const Buttonstyle ={
       null}
  
      
-      
+ <div style={{ position: 'fixed', bottom:20, right: 20}}>
+<Button variant="contained" color="primary" style={{ marginRight: 20}} onClick= {handlesubmit}>
+<SaveIcon />  Save
+</Button>
+</div>
     </div>
   );
 }

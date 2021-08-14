@@ -43,6 +43,7 @@ const useStyles = makeStyles({
 });
 
 export default function SideMenu(props) {
+  console.log(props.user)
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -50,6 +51,11 @@ export default function SideMenu(props) {
     bottom: false,
     right: false,
   });
+
+  const menus = ['Insurance'];
+    if(Number(props?.user?.RoleId) === 1) {
+      menus.push('Users');
+    }
 const handleLogout =() =>{
   localStorage.setItem("isUserLoggedIn", false);
   window.location.href = '/';
@@ -63,6 +69,7 @@ const handleLogout =() =>{
   
 
   const list = (anchor) => (
+    
     <div
       className={clsx(classes.list, {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
@@ -72,11 +79,8 @@ const handleLogout =() =>{
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem>
-        <Itailogo />
-        </ListItem>
-        <hr/>
-        {['Users', 'Insurance'].map((text) => (
+      <hr/>
+        {menus.map((text) => (
           <ListItem button key={text} onClick={()=>props.handleMenu(text)}>
             <ListItemIcon>{text.toUpperCase() === 'USERS' ? <PeopleIcon /> : <AssignmentIcon/>}</ListItemIcon>
             <ListItemText primary={text} />
@@ -95,12 +99,17 @@ const handleLogout =() =>{
     <div className={classes.topMenu}>
         <React.Fragment >
         
-          <MenuIcon onClick={toggleDrawer('left', true) } className={classes.menuicon}/>
-          {/* <ExitToAppIcon className={classes.logout} onClick={()=>handleLogout()}/> */}
-          {/* <LoggedInUserInfo user={props.user.FirstName}/> */}
-          
+          <MenuIcon onClick={toggleDrawer('left', true) } className={classes.menuicon}/>          
           <h1 className={classes.insurenceHeading}>{props.heading}</h1>
+          {props.user ? <h3 style={{float: "right",
+    position: "relative",
+    color: "#fff",
+    fontSize: 30,
+    bottom: 20, right: 20}}>{props.user.FirstName + ' ' + props.user.LastName}</h3>  : null}
+
           <Drawer anchor={'left'} open={state['left']} onClose={toggleDrawer('left', false)}>
+            <Itailogo />
+            
             {list('left')}
           </Drawer>
         </React.Fragment>

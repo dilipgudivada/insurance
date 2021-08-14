@@ -1,18 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Itailogo, Underline,CustomButton, SignInLogo} from '../Components/smallComponents';
+import {CustomButton} from '../Components/smallComponents';
 import TopDentists2020Opener from "../images/TopDentists2020Opener.png";
-import {SIGNING_TEXT,SIGNUP_TEXT} from '../Constants/generalConstants';
-import {HomePageFooterMenu} from '../Components/HomePageFooterMenu';
+import {SIGNING_TEXT} from '../Constants/generalConstants';
 import DraggableDialog from '../Components/DraggableDialog';
-function Copyright() {
-  return (
-    <div >
 
-    </div>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
 
@@ -72,11 +65,8 @@ const style={
     signin={signin}
 
     />
-    {/* <SignInLogo/>
-    <Underline/> */}
     <div className={classes.heading}>INSURANCE VERIFICATION FORM</div>
     <CustomButton text={SIGNING_TEXT} Color={"white"} onClick={()=>handleClickOpen(signin)} />
-    {/* <Underline /> */}
     </Container>
     </div>
   );
