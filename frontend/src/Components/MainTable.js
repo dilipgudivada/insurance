@@ -23,7 +23,7 @@ const columns = [
   },
   {
     id: 'InsuredName',
-    label: 'InsuredDOB',
+    label: 'InsuredName',
     
     align: 'left',
     format: (value) => value.toLocaleString('en-US'),
@@ -50,57 +50,13 @@ const columns = [
     format: (value) => value.toFixed(2),
   },
   {
-    id: 'InsuredEmployer',
-    label: 'InsuredEmployer',
-    
-    align: 'left',
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: 'InsCompanyNo',
-    label: 'InsCompanyNo',
-    
-    align: 'left',
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: 'InsCompany',
+    id: 'Insurance Company',
     label: 'InsCompany',
     
     align: 'left',
     format: (value) => value.toFixed(2),
   },
-  {
-    id: 'InsCompAddress',
-    label: 'InsCompAddress',
-    
-    align: 'left',
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: 'InsRep',
-    label: 'InsRep',
-    
-    align: 'left',
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: 'RepNo',
-    label: 'RepNo',
-    
-    align: 'left',
-    format: (value) => value.toFixed(2),
-  },
-
-  
 ];
-
-function createData(PatientID,GuestName,GuestDOB,InsuredName,InsuredDOB,InsuredSSN,InsuredID,GroupNumber,InsuredEmployer,InsCompanyNo,InsCompany,InsCompAddress,InsRep
-  ) {
- 
-  return { PatientID,GuestName,GuestDOB,InsuredName,InsuredDOB,InsuredSSN,InsuredID,GroupNumber,InsuredEmployer,InsCompanyNo,InsCompany,InsCompAddress,InsRep
-  };
-}
 
 const useStyles = makeStyles({
   root: {
@@ -110,11 +66,6 @@ const useStyles = makeStyles({
   container: {
     maxHeight: "100%",
   },
-  addIcon:{
-    position:"fixed",
-    bottom:"10%",
-    left:"10%"
-  }
 });
 
 export default function MainTable(props) {
@@ -322,7 +273,8 @@ export default function MainTable(props) {
          position:"fixed",
          bottom:"10%",
          left:"93%",
-    }} color="primary" className={classes.addIcon}
+         color:"#3f9fb5"
+    }}  
     onClick={()=>handleClickOpen()}/>
     {isRowSelected?<FullScreenDialog open={open} handleClose={handleClose} allInsurances={selectedRow} EditInsurance={isRowSelected}/>:
     <FullScreenDialog open={open} handleClose={handleClose} allInsurances={emptyDataFields} EditInsurance={isRowSelected}/>}

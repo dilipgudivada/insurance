@@ -11,6 +11,18 @@ import TableRow from '@material-ui/core/TableRow';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import FullScreenDialog from './FullScreenDialog';
 
+const  roles = [{id: 1, roleName: "Admin"}, {id:2, roleName: "Dental Office Person"}, { id: 3, roleName: 'Agent'}];
+
+
+function roleName(value) {
+  let results = [];
+  roles.forEach((item) => {
+    if(item.id.toString() === value.toString()) {
+       results.push(<div>{item.roleName}</div>);
+    }
+  });
+  return results;
+}
 const columns = [
   { id: 'UserId', label: 'UserId', align: 'left' },
   {
@@ -29,31 +41,25 @@ const columns = [
     id: 'MobileNumber',
     label: 'MobileNumber',
     align: 'left',
-    format: (value) => value.toFixed(2),
+    format: (value) => value,
   },
   {
     id: 'EmailAddress',
     label: 'EmailAddress',
     align: 'left',
-    format: (value) => value.toFixed(2),
+    format: (value) => value,
   },
   {
     id: 'Gender',
     label: 'Gender',
     align: 'left',
-    format: (value) => value.toFixed(2),
+    format: (value) => value,
   },
   {
-    id: 'Age',
-    label: 'Age',
-    align: 'left',
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: 'Role',
+    id: 'RoleId',
     label: 'Role',
     align: 'left',
-    format: (value) => value.toFixed(2),
+    format: (value) => {return <div>{roleName(value)}</div>},
   }
   
 ];
@@ -144,7 +150,7 @@ const onRowClcik=(row)=>{
                     const value = row[column.id];
                     return (
                       <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                        {column.format ? column.format(value) : value}
                       </TableCell>
                     );
                   })}
@@ -156,7 +162,7 @@ const onRowClcik=(row)=>{
         </Table>
         <TablePagination
         style={{ position: 'relative', bottom : 0}}
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsnPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}
@@ -171,7 +177,8 @@ const onRowClcik=(row)=>{
          position:"fixed",
     bottom:"10%",
     left:"93%",
-    }} color="primary" className={classes.addIcon}
+    color:"#3f9fb5"
+    }}
     onClick={()=>handleClickOpen()}/>
     {isRowSelected?<FullScreenDialog open={open} handleClose={handleClose} allUsers={selectedRow} EditUser= {isRowSelected}/>:
     <FullScreenDialog open={open} handleClose={handleClose} allUsers={emptyDataFields} EditUser ={isRowSelected}/>}

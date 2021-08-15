@@ -1,14 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
+import Slide from '@material-ui/core/Slide';
+import AddEditInsurences from './AddEditInsurences'
+import UserForm from './UserForm';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
-import AddEditUser from './AddEditUser';
-import AddEditInsurences from './AddEditInsurences'
-import {Underline} from '../Components/smallComponents';
+import Typography from '@material-ui/core/Typography';
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
@@ -148,15 +149,7 @@ const breakdown=[
 "VerifiedDate",
 
 ];
-const PatientInformation= [
-  "PatientID",
-    "GuestName",
-    "GuestDOB",
-    "InsuredName",
-    "InsuredDOB",
-    "InsuredSSN",
-    "InsuredID",
-    ]
+const PatientInformation= ["PatientID","GuestName","GuestDOB","InsuredName","InsuredDOB","InsuredSSN","InsuredID"];
 
 
 
@@ -210,8 +203,12 @@ export default function FullScreenDialog(props) {
       bDown= {...bDown,pair }
     }
     if( PatientInformation.includes(key)){
-      var pair= pInfo[key]=value
+      if(key) {
+        var pair= pInfo[key]=value
       pInfo= {...pInfo,pair }
+
+      }
+      
     }
       })
      
@@ -235,19 +232,22 @@ export default function FullScreenDialog(props) {
     <div>
    
       <Dialog fullScreen open={props.open} onClose={props.handleClose} TransitionComponent={Transition}>
-        <AppBar className={classes.appBar}>
+      
+      {  props.allUsers? <UserForm props={props}/>:
+      <div>
+      <AppBar style={{ backgroundColor:"#3f9fb5", height: 60}}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={props.handleClose} aria-label="close">
+     <Typography variant="h4" gutterBottom>
+     {props.EditInsurance?<h6> Edit Insurance </h6>: <h6>Add Insurance</h6> }
+      </Typography>
+            <IconButton  color="inherit" onClick={props.handleClose} aria-label="close" style={{ fontSize: 36,position: 'absolute', right: 20}}>
               <CloseIcon />
             </IconButton>
             
           </Toolbar>
         </AppBar>
-      {  props.allUsers? <AddEditUser props={props}/>:
-      <div>
-     {props.EditInsurance?<h1> Edit Insurance </h1>: <h1>Add Insurance</h1> }
-
-     <h2> Patient Information: </h2>
+        <div style={{ marginTop: 60}}>
+        <h2> Patient Information: </h2>
      <div    className={classes.underline}></div>
       <AddEditInsurences allInsurances={props} 
       finalInsurenceToSend={finalInsurenceToSend}
@@ -276,7 +276,7 @@ export default function FullScreenDialog(props) {
       <AddEditInsurences allInsurances={props} 
       finalInsurenceToSend={finalInsurenceToSend}
       someInsurances = {devidedInsurances.history} handleTextChange={handleTextChange}/>
-      
+      </div>
       </div>
       }
       </Dialog>

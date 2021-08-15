@@ -4,12 +4,34 @@ const app = express();
 const mysql = require('mysql2');
 const { raw } = require('body-parser');
 const cors = require('cors')
+const nodemailer = require('nodemailer');
+
+
+nodemailer.createTransport({
+  host: "mail.google.com", 
+    port: 587,
+    secure: false,
+  auth: {
+    user: "gudivadadilip",
+    pass: "Priya@1715" 
+  }
+});
+
+// // verifying the connection configuration
+// transporter.verify(function(error, success) {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log("Server is ready to take our messages!");
+//   }
+// });
  
 // parse application/json
 app.use(bodyParser.json());
 
 // Cors Origin 
 app.use(cors());
+
  
 //create database connection
 const conn = mysql.createConnection({
@@ -542,6 +564,8 @@ app.put ('/api/updateuser/:id', (req,res) => {
   +req.body.RoleId
   +"', EmailAddress='"
   +req.body.EmailAddress
+  +"', Password='"
+  +req.body.Password
   +"' WHERE UserId='"+req.params.id+"'";
   let query = conn.query(sql, (err, results) => {
     console.log("ress",results)
