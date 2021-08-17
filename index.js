@@ -562,22 +562,23 @@ app.put ('/api/updateuser/:id', (req,res) => {
   +"', LastName='"
   +req.body.LastName
   +"', DOB='"
-  +req.body.DOB || null
+  +req.body.DOB
   +"', Gender='"
-  +req.body.Gender || null
+  +req.body.Gender
   +"', MobileNumber='"
-  +req.body.MobileNumber || null
+  +req.body.MobileNumber
   +"', RoleId='"
   +req.body.RoleId
   +"', EmailAddress='"
   +req.body.EmailAddress
   +"', Password='"
-  +req.body.Password || ''    
+  +req.body.Password   
   +"', LocationId='"
-  +req.body.LocationId  || null
+  +req.body.LocationId
   +"', Country='"
-  +req.body.Country  || null
+  +req.body.Country
   +"' WHERE UserId='"+req.params.id+"'";
+  
   let query = conn.query(sql, (err, results) => {
     console.log("ress",results)
     if(err) {
