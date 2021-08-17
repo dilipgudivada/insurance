@@ -1,4 +1,4 @@
-CREATE TABLE `insurance`.`generalinfo` (
+CREATE TABLE insurance.`generalinfo` (
   `PatientID` int DEFAULT NULL,
   `GuestName` varchar(150) DEFAULT NULL,
   `GuestDOB` varchar(20) DEFAULT NULL,
@@ -14,5 +14,8 @@ CREATE TABLE `insurance`.`generalinfo` (
   `InsRep` varchar(250) DEFAULT NULL,
   `RepNo` varchar(250) DEFAULT NULL,
   `FeeSchedule` varchar(250) DEFAULT NULL,
+  `LocationId` varchar(10) DEFAULT NULL,
+  `CreatedBy` varchar(20) DEFAULT NULL,
+  `UpdatedBy` varchar(20) DEFAULT NULL,
   UNIQUE KEY `idx_generalinfo_PatientID` (`PatientID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

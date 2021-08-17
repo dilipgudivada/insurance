@@ -1,4 +1,4 @@
-CREATE TABLE `insurance`.`users` (
+CREATE TABLE insurance.`users` (
   `UserId` varchar(10) DEFAULT NULL,
   `FirstName` varchar(100) DEFAULT NULL,
   `LastName` varchar(100) DEFAULT NULL,
@@ -8,5 +8,7 @@ CREATE TABLE `insurance`.`users` (
   `Gender` varchar(10) DEFAULT NULL,
   `DOB` varchar(20) DEFAULT NULL,
   `RoleId` int DEFAULT NULL,
+  `LocationId` varchar(10) DEFAULT NULL,
+  `Country` varchar(10) default null,
   UNIQUE KEY `idx_users_UserId` (`UserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

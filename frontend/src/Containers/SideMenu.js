@@ -9,9 +9,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import PeopleIcon from '@material-ui/icons/People';
 import MenuIcon from '@material-ui/icons/Menu';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import {Itailogo,LoggedInUserInfo } from '../Components/smallComponents';
+import {Itailogo } from '../Components/smallComponents';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
   list: {

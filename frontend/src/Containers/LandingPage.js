@@ -2,8 +2,12 @@ import React from 'react';
 import SideMenu from './SideMenu';
 import MainTable from '../Components/MainTable';
 import UsersTable from '../Components/UsersTable';
-import {LOGIN_API,GET_USERS,GET_INSURANCES} from "../Constants/urlConstants";
+import { GET_USERS,GET_INSURANCES} from "../Constants/urlConstants";
+import { useDispatch } from 'react-redux';
+import { getLocations } from '../Redux/Actions/LocationActions';
+
 export default function LandingPage(userDetails) {
+  const dispatch = useDispatch();
   const style = {
     height: "100%",
     width:"100%",
@@ -33,6 +37,7 @@ export default function LandingPage(userDetails) {
     setuserDetails(JSON.parse(userDetails.userDetails));
     getInsurences();
     getUsers();
+    dispatch(getLocations());
     
   }, [updatePage]);
 

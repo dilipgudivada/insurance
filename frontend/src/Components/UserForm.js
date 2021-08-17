@@ -1,56 +1,94 @@
-import React, { useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import {TextField, InputLabel, Select, Button} from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import {ServiceCall} from '../Services/Services';
-import SaveIcon from '@material-ui/icons/Save';
+import React, { useState } from "react";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { TextField, InputLabel, Select, Button } from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import { ServiceCall } from "../Services/Services";
+import SaveIcon from "@material-ui/icons/Save";
+import { useSelector } from "react-redux";
 
 export default function UserForm(props) {
-  console.log(JSON.stringify(props.props.allUsers))
+  const locations = useSelector((state) => state.locationReducer);
   const [userData, setUserData] = useState({});
-  const [type, setType] =  React.useState("");
-  const [url, seturl] =  React.useState("");
+  const [type, setType] = React.useState("");
+  const [url, seturl] = React.useState("");
   const handleTextChange = (event) => {
-    console.log(event.target.name, event.target.value)
-    setUserData({ ...userData, [event.target.name]: event.target.value });
+    if (event.target.name === "RoleId" && event.target.value !== "2") {
+      setUserData({
+        ...userData,
+        [event.target.name]: event.target.value,
+        LocationId: null,
+      });
+    } else {
+      setUserData({ ...userData, [event.target.name]: event.target.value });
+    }
   };
-  const handlesubmit=()=>{
-    ServiceCall
-    .postService(url, type, userData )
-    .then((data) => alert(data));
-  }
+  const handlesubmit = () => {
+    ServiceCall.postService(url, type, userData).then((data) => alert(data));
+  };
   React.useEffect(() => {
     setUserData(props.props.allUsers);
-    if(props.props.EditUser){
+    if (props.props.EditUser) {
       setType("put");
-      
-      seturl("api/updateuser/"+props.props.allUsers.UserId);
-    }
-    else{
+
+      seturl("api/updateuser/" + props.props.allUsers.UserId);
+    } else {
       setType("post");
-      seturl("api/createuser")
+      seturl("api/createuser");
     }
   }, []);
   return (
     <React.Fragment>
-      <AppBar style={{ backgroundColor:"#3f9fb5"}}>
-          <Toolbar>
+      <AppBar style={{ backgroundColor: "#3f9fb5" }}>
+        <Toolbar>
           <Typography variant="h4" gutterBottom>
-       {props.props.EditUser ? "Edit user" : "Add User"} 
-      </Typography>
-            <IconButton  color="inherit" onClick={props.props.handleClose} aria-label="close" style={{ fontSize: 36,position: 'absolute', right: 20}}>
-              <CloseIcon />
-            </IconButton>
-            
-          </Toolbar>
-        </AppBar>
-    
-      
-      <Grid container spacing={3} style={{ width: '96%', paddingLeft: 40, marginTop: 65}}>
+            {props.props.EditUser ? "Edit user" : "Add User"}
+          </Typography>
+          <IconButton
+            color="inherit"
+            onClick={props.props.handleClose}
+            aria-label="close"
+            style={{ fontSize: 36, position: "absolute", right: 20 }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+
+      <Grid
+        container
+        spacing={3}
+        style={{ width: "96%", paddingLeft: 40, marginTop: 65 }}
+      >
+        <Grid item xs={12} sm={6}>
+          <TextField
+            disabled={props?.props?.EditUser}
+            id="UserId"
+            label="User Id"
+            value={userData["UserId"]}
+            fullWidth
+            autoComplete="UserId"
+            name="UserId"
+            onChange={handleTextChange}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            disabled={props?.props?.EditUser}
+            required
+            id="Password"
+            name="Password"
+            label="Password"
+            fullWidth
+            autoComplete="Password"
+            type="password"
+            value={userData["Password"]}
+            onChange={handleTextChange}
+          />
+        </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -73,10 +111,9 @@ export default function UserForm(props) {
             autoComplete="LastName"
             value={userData["LastName"]}
             onChange={handleTextChange}
-
           />
         </Grid>
-        
+
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -87,7 +124,6 @@ export default function UserForm(props) {
             autoComplete="MobileNumber"
             value={userData["MobileNumber"]}
             onChange={handleTextChange}
-
           />
         </Grid>
 
@@ -101,112 +137,142 @@ export default function UserForm(props) {
             autoComplete="Email Address"
             value={userData["EmailAddress"]}
             onChange={handleTextChange}
-
-
           />
+        </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <InputLabel htmlFor="Gender">Gender</InputLabel>
+          <Select
+            name="Gender"
+            id="Gender"
+            native
+            inputProps={{
+              name: "Gender",
+              id: "Gender",
+            }}
+            fullWidth
+            value={userData["Gender"]}
+            onChange={handleTextChange}
+          >
+            <option aria-label="None" value={null}>
+              Select
+            </option>
+            <option value={"Male"}>Male</option>
+            <option value={"Female"}>Female</option>
+          </Select>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            required
-            id="Password"
-            name="Password"
-            label="Password"
+            id="DOB"
+            name="DOB"
+            label="DOB"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
             fullWidth
-            autoComplete="Password"
-            type="password"
-            value={userData["Password"]}
+            value={userData["DOB"]}
             onChange={handleTextChange}
-
           />
         </Grid>
 
         <Grid item xs={12} sm={6}>
-        <InputLabel htmlFor="Gender">Gender</InputLabel>
-        <Select
-          name="Gender"
-          id="Gender"
-          native
-          value={""}
-          inputProps={{
-            name: 'Gender',
-            id: 'Gender',
-          }}
-          fullWidth
-          value={userData["Gender"]}
-          onChange={handleTextChange}
-        >
-          <option aria-label="None" value="" />
-          <option value={"Male"}>Male</option>
-          <option value={"Female"}>Female</option>
-        </Select>
-        </Grid>
-
-
-        <Grid item xs={12} sm={6}>
-        <InputLabel htmlFor="RoleIdText">Role</InputLabel>
-        <Select
-          native
-          value={userData["RoleId"]}
-          inputProps={{
-            name: 'RoleId',
-            id: 'RoleIdText',
-          }}
-          fullWidth
-          required
-          name="RoleId"
-          autoComplete="RoleId"
-          onChange={handleTextChange}
-
-        >
-          <option aria-label="None" value="" />
-          <option value={"1"}>Administrator</option>
-          <option value={"2"}>Dental Office Person</option>
-          <option value={"3"}>Agent</option>
-        </Select>
+          <InputLabel htmlFor="RoleId">Role</InputLabel>
+          <Select
+            native
+            value={userData["RoleId"]}
+            inputProps={{
+              name: "RoleId",
+              id: "RoleId",
+            }}
+            fullWidth
+            required
+            name="RoleId"
+            autoComplete="RoleId"
+            onChange={handleTextChange}
+          >
+            <option aria-label="None" value={null}>Select</option>
+            <option value={"1"}>Administrator</option>
+            <option value={"2"}>Dental Office Person</option>
+            <option value={"3"}>Agent</option>
+          </Select>
         </Grid>
 
         <Grid item xs={12} sm={6}>
-        <TextField
-    id="DOB"
-    name="DOB"
-    label="DOB"
-    type="date"
-    InputLabelProps={{
-      shrink: true,
-    }}
-    fullWidth
-    value={userData["DOB"]}
-    onChange={handleTextChange}
-
-  />
+          <InputLabel htmlFor="LocationId">Location</InputLabel>
+          <Select
+            native
+            value={userData["LocationId"]}
+            inputProps={{
+              name: "LocationId",
+              id: "LocationId",
+            }}
+            fullWidth
+            required
+            name="LocationId"
+            autoComplete="LocationId"
+            onChange={handleTextChange}
+            disabled={userData["RoleId"] &&  userData["RoleId"].toString() !== "2"}
+          >
+            <option aria-label="None" value={null}>
+              Select
+            </option>
+            {console.log(locations.data.response)}
+            {locations?.data?.response?.length &&
+              locations.data.response.map((item, index) => {
+                return (
+                  <option key={`${item} + ${index}`} value={item.LocationId}>
+                    {item.LocationName}
+                  </option>
+                );
+              })}
+          </Select>
         </Grid>
-
 
         <Grid item xs={12} sm={6}>
-        <TextField
-    id="UserId"
-    label="User Id"
-    value={userData["UserId"]}
-    fullWidth
-    autoComplete="UserId"
-    name="UserId"
-    onChange={handleTextChange}
-
-  />
+          <InputLabel htmlFor="Country">Country</InputLabel>
+          <Select
+            native
+            value={userData["Country"]}
+            inputProps={{
+              name: "Country",
+              id: "Country",
+            }}
+            fullWidth
+            required
+            name="Country"
+            autoComplete="Country"
+            onChange={handleTextChange}
+          >
+            <option aria-label="None" value={null}>
+              Select
+            </option>
+            <option value={"US"}>US</option>
+            <option value={"INDIA"}>INDIA</option>
+          </Select>
         </Grid>
-
       </Grid>
 
-     <br/>
-<div style={{ position: 'fixed', bottom:20, right: 20}}>
-<Button variant="contained" color="primary" style={{ marginRight: 20}} onClick= {handlesubmit}>
- <SaveIcon /> { ' '}Save
-</Button>
+      <br />
+      <div style={{ position: "fixed", bottom: 20, right: 20 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginRight: 20 }}
+          onClick={handlesubmit}
+        >
+          <SaveIcon /> Save
+        </Button>
 
-<Button variant="contained" color="secondary" style={{ marginRight: 20}} onClick= {props.props.handleClose}>
-<CloseIcon /> { ' '}  Cancel
-</Button>
-</div>
+        <Button
+          variant="contained"
+          color="secondary"
+          style={{ marginRight: 20 }}
+          onClick={props.props.handleClose}
+        >
+          <CloseIcon /> Cancel
+        </Button>
+      </div>
     </React.Fragment>
   );
 }

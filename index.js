@@ -83,6 +83,9 @@ app.post('/api/insurance',(req, res) => {
     InsRep: req.body.InsRep || null,
     RepNo: req.body.RepNo || null,
     FeeSchedule: req.body.FeeSchedule || null,
+    LocationId: req.body.LocationId || null,
+    CreatedBy: req.body.CreatedBy || null,
+    UpdatedBy: req.body.UpdatedBy || null,
    };
     
   let sql = "INSERT INTO generalinfo SET ?";
@@ -248,6 +251,8 @@ app.put('/api/insurance/:id',(req, res) => {
   +req.body.RepNo
   +"', FeeSchedule='"
   +req.body.FeeSchedule
+  +"', UpdatedBy='"
+  +req.body.UpdatedBy
   +"' WHERE PatientID='"+req.params.id+"'";
   let query = conn.query(sql, (err, results) => {
     if(err)  {
@@ -528,13 +533,15 @@ app.post ('/api/createuser', (req,res) => {
   let data = {
     UserId: req.body.UserId,
     Password: req.body.Password,
-    Gender: req.body.Gender,
-    DOB: req.body.DOB,
+    Gender: req.body.Gender || null,
+    DOB: req.body.DOB ||null,
     FirstName: req.body.FirstName,
     LastName: req.body.LastName,
-    MobileNumber: req.body.MobileNumber,
+    MobileNumber: req.body.MobileNumber || null,
     RoleId: req.body.RoleId,
-    EmailAddress: req.body.EmailAddress
+    EmailAddress: req.body.EmailAddress,
+    LocationId: req.body.LocationId || null,
+    Country: req.body.Country || null,   
   }
   let sql = "INSERT INTO users SET ?";
   let query = conn.query(sql, data, (err, results) => {
@@ -555,17 +562,21 @@ app.put ('/api/updateuser/:id', (req,res) => {
   +"', LastName='"
   +req.body.LastName
   +"', DOB='"
-  +req.body.DOB
+  +req.body.DOB || null
   +"', Gender='"
-  +req.body.Gender
+  +req.body.Gender || null
   +"', MobileNumber='"
-  +req.body.MobileNumber
+  +req.body.MobileNumber || null
   +"', RoleId='"
   +req.body.RoleId
   +"', EmailAddress='"
   +req.body.EmailAddress
   +"', Password='"
-  +req.body.Password
+  +req.body.Password || ''    
+  +"', LocationId='"
+  +req.body.LocationId  || null
+  +"', Country='"
+  +req.body.Country  || null
   +"' WHERE UserId='"+req.params.id+"'";
   let query = conn.query(sql, (err, results) => {
     console.log("ress",results)
@@ -623,6 +634,17 @@ app.put('/api/changepassword', (req, res) => {
     }
   });
 });
+
+app.get('/api/locations',(req, res) => {
+  let sql = "SELECT * FROM locations";
+  let query = conn.query(sql, (err, results) => {
+    if(err) {
+      res.send(JSON.stringify({"status": 400, "error": err, "response": null}));
+    } else {
+      res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+    }
+  });
+})
 
 //Server listening
 app.listen(3001,() =>{

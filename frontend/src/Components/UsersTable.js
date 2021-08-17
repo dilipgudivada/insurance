@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import FullScreenDialog from './FullScreenDialog';
 
-const  roles = [{id: 1, roleName: "Admin"}, {id:2, roleName: "Dental Office Person"}, { id: 3, roleName: 'Agent'}];
+const  roles = [{id: 1, roleName: "Administrator"}, {id:2, roleName: "Dental Office Person"}, { id: 3, roleName: 'Agent'}];
 
 
 function roleName(value) {
@@ -64,11 +64,6 @@ const columns = [
   
 ];
 
-function createData(UserId, FirstName, LastName,MobileNumber,EmailAddress,Gender,Age,Role) {
-  
-  return {UserId, FirstName, LastName,MobileNumber,EmailAddress,Gender,Age,Role};
-}
-
 const useStyles = makeStyles({
   root: {
     width: '100%',
@@ -86,8 +81,7 @@ export default function UsersTable(props) {
   const [open, setOpen] = React.useState(false);
   const [isRowSelected, setisRowSelected] = React.useState(false);
   const [selectedRow, setselectedRow] = React.useState({});
-  const [emptyDataFields, setemptyDataFields] = React.useState({
-    
+  const [emptyDataFields, setemptyDataFields] = React.useState({  
       "UserId": null,
       "FirstName": null,
       "LastName": null,
@@ -96,10 +90,12 @@ export default function UsersTable(props) {
       "EmailAddress": null,
       "Gender": null,
       "DOB": null,
-      "RoleId": null
+      "RoleId": null,
+      "LocationId": null,
+      "City": null,
+      "Country": null,
     })
   const handleClickOpen = () => {
- 
     setOpen(true);
   };
   const handleClose = () => {
@@ -119,7 +115,6 @@ export default function UsersTable(props) {
     setPage(0);
   };
 const onRowClcik=(row)=>{
-
   setselectedRow(row)
   setOpen(true);
   setisRowSelected(true);
@@ -181,7 +176,7 @@ const onRowClcik=(row)=>{
     }}
     onClick={()=>handleClickOpen()}/>
     {isRowSelected?<FullScreenDialog open={open} handleClose={handleClose} allUsers={selectedRow} EditUser= {isRowSelected}/>:
-    <FullScreenDialog open={open} handleClose={handleClose} allUsers={emptyDataFields} EditUser ={isRowSelected}/>}
+    <FullScreenDialog open={open} handleClose={handleClose} allUsers={emptyDataFields} EditUser ={isRowSelected} locations={props.locations}/>}
     
     </Paper>
   );
