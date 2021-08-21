@@ -184,22 +184,22 @@ export default function FullScreenDialog(props) {
     
     if(props.allInsurances){
       setIncomingInsurances(props.allInsurances)
-     var x= Object.entries(props.allInsurances).map(([key, value], i) =>  {
+     Object.entries(props.allInsurances).forEach(([key, value], i) =>  {
      
      if( history.includes(key)){
-       var pair= htr[key]=value
+       const pair= htr[key]=value
        htr= {...htr,pair }
      }
      if( insuranceVerufication.includes(key)){
-      var pair= inVer[key]=value
+      const pair= inVer[key]=value
       inVer= {...inVer,pair }
     }
     if( insuranceInformation.includes(key)){
-      var pair= inInfo[key]=value
+      const pair= inInfo[key]=value
       inInfo= {...inInfo,pair }
     }
     if( breakdown.includes(key)){
-      var pair= bDown[key]=value
+      const pair= bDown[key]=value
       bDown= {...bDown,pair }
     }
     if( PatientInformation.includes(key)){

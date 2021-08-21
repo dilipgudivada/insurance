@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import logoPng from '../images/logo.jpg';
+import { receivedPosts } from "../Redux/Actions/LoginUserActions";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = (props) => {
   const classes = useStyles();
-
+const dispatch = useDispatch();
   const history = useHistory();
   const [values, setValues] = useState({
     userName: "",
@@ -72,7 +74,7 @@ const Login = (props) => {
       .then((data) => {
         
         if(data.status === 200) {
-         
+        dispatch(receivedPosts(data.response[0]));
         localStorage.setItem("userDetails", JSON.stringify(data.response[0]));
         localStorage.setItem("isUserLoggedIn", true);
         history.push("/home");

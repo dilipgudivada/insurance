@@ -2,22 +2,23 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 import Container from '@material-ui/core/Container';
 import SigninPage from './Containers/SinginPage';
 import LandingPage from './Containers/LandingPage';
+import { useSelector } from "react-redux";
 export default function App() {
   
-
-let isLoggedIn=localStorage.getItem('isUserLoggedIn')?Landing:Home
+const loginUserReducer  = useSelector(state => state.loginUserReducer);
+const isUserIdExists = loginUserReducer?.data?.UserId;
 
   return (
     <Router>
     <Switch>
          <Route exact path="/" component={Home} />
-         <Route path="/home" component={isLoggedIn} />
-         {/* <Route path="/explore" component={Explore} /> */}
+        {isUserIdExists  ? <Route path="/home" component={Landing} /> : <Redirect to="/" /> }  
        </Switch>
        </Router>
   );

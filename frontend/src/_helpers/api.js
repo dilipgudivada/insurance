@@ -40,15 +40,6 @@ export async function handleResponse(response) {
     });
 }
 
-// allows us to pass a token with every request
-function getAuthFromStorage() {
-  try {
-    return JSON.parse(localStorage.getItem('auth')).token;
-  } catch (err) {
-    return null;
-  }
-}
-
 /**
  * Generic request
  *

@@ -48,7 +48,18 @@ conn.connect((err) =>{
 });
  
 //show all products
+app.get('/api/insurances/:id',(req, res) => {
+  console.log(req.params);
+  let sql = "SELECT * FROM generalinfo g inner join additionalinfo ad ON g.PatientID = ad.PatientId inner join oralsurgerycoverage osc ON g.PatientID = osc.patientID WHERE g.LocationId="+ req.params.id;
+  let query = conn.query(sql, (err, results) => {
+    if(err) throw err;
+    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+  });
+});
+
+//show all products
 app.get('/api/insurances',(req, res) => {
+  console.log(req.params);
   let sql = "SELECT * FROM generalinfo g inner join additionalinfo ad ON g.PatientID = ad.PatientId inner join oralsurgerycoverage osc ON g.PatientID = osc.patientID";
   let query = conn.query(sql, (err, results) => {
     if(err) throw err;

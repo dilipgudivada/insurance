@@ -9,6 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import SaveIcon from '@material-ui/icons/Save';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AddEditInsurences(props) {
+  const loginUserReducer = useSelector(state => state.loginUserReducer);
+  const userData = loginUserReducer?.data;
   const classes = useStyles();
 const [overalldata, setOverAllData] =  React.useState({});
 const [type, setType] =  React.useState("");
@@ -31,7 +34,7 @@ const checkifDPresent=(e)=>{
   if(e[0][0]==="D"){
 
 let methodCode= e[0].slice(0, 5)
-Object.entries(overalldata).map(([key, value], i) =>  {
+Object.entries(overalldata).forEach(([key, value], i) =>  {
  
   
   if(methodCode===key.slice(0, 5)&&(typeof value === "boolean")){
@@ -58,7 +61,6 @@ Object.entries(overalldata).map(([key, value], i) =>  {
 React.useEffect(() => {
  
   setOverAllData(props.someInsurances);
- console.log("props coming to add edit insurence", props)
   if(props.allInsurances.EditInsurance){
     setType("put");
     seturl("api/insurance/"+props.finalInsurenceToSend.PatientID);
@@ -68,11 +70,26 @@ React.useEffect(() => {
     seturl("api/insurance")
   }
 
-}, [props.finalInsurenceToSend]);
+}, [props]);
 const handlesubmit=()=>{
-  ServiceCall
-  .postService(url, type, props.finalInsurenceToSend )
-  .then((data) => alert(data));
+  if(props.allInsurances.EditInsurance){ 
+    const finalData = {
+      ...props.finalInsurenceToSend,
+      UpdatedBy: userData.UserId
+    };
+    ServiceCall
+    .postService(url, type, finalData )
+    .then((data) => alert(data));
+  } else {
+    const finalData = {
+      ...props.finalInsurenceToSend,
+      LocationId: userData.LocationId,
+      CreatedBy: userData.UserId
+    };
+    ServiceCall
+    .postService(url, type, finalData )
+    .then((data) => alert(data));
+  }
 }
 
 

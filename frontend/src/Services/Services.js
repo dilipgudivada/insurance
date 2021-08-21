@@ -1,9 +1,9 @@
-import { put, del, post } from '../_helpers/api';
+import { put, post } from '../_helpers/api';
 
 async function postService( url, type, data ) {
     // Default options are marked with *
    console.log("type",type)
-   if(type=="post"){
+   if(type==="post"){
     post({
       path: url,
       body:data ,

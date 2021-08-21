@@ -51,9 +51,10 @@ export default function SideMenu(props) {
     right: false,
   });
 
-  const menus = ['Insurance'];
+  const menus = [{
+    menuName:'Insurance', icon: <PeopleIcon />}, {menuName: 'Report', icon: <AssignmentIcon />}];
     if(Number(props?.user?.RoleId) === 1) {
-      menus.push('Users');
+      menus.push({menuName:'Users', icon: <AssignmentIcon/>});
     }
 const handleLogout =() =>{
   localStorage.setItem("isUserLoggedIn", false);
@@ -79,10 +80,10 @@ const handleLogout =() =>{
     >
       <List>
       <hr/>
-        {menus.map((text) => (
-          <ListItem button key={text} onClick={()=>props.handleMenu(text)}>
-            <ListItemIcon>{text.toUpperCase() === 'USERS' ? <PeopleIcon /> : <AssignmentIcon/>}</ListItemIcon>
-            <ListItemText primary={text} />
+        {menus.map((menu) => (
+          <ListItem button key={menu.menuName} onClick={()=>props.handleMenu(menu.menuName)}>
+            <ListItemIcon>{menu.icon}</ListItemIcon>
+            <ListItemText primary={menu.menuName} />
           </ListItem>
         ))}
         <ListItem button onClick={()=>handleLogout()}>

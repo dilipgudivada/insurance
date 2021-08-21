@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 
 export default function UserForm(props) {
   const locations = useSelector((state) => state.locationReducer);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(props?.props?.allUsers);
   const [type, setType] = React.useState("");
   const [url, seturl] = React.useState("");
   const handleTextChange = (event) => {
@@ -30,16 +30,14 @@ export default function UserForm(props) {
     ServiceCall.postService(url, type, userData).then((data) => alert(data));
   };
   React.useEffect(() => {
-    setUserData(props.props.allUsers);
     if (props.props.EditUser) {
       setType("put");
-
       seturl("api/updateuser/" + props.props.allUsers.UserId);
     } else {
       setType("post");
       seturl("api/createuser");
     }
-  }, []);
+  }, [props]);
   return (
     <React.Fragment>
       <AppBar style={{ backgroundColor: "#3f9fb5" }}>

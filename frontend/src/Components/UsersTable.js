@@ -81,7 +81,7 @@ export default function UsersTable(props) {
   const [open, setOpen] = React.useState(false);
   const [isRowSelected, setisRowSelected] = React.useState(false);
   const [selectedRow, setselectedRow] = React.useState({});
-  const [emptyDataFields, setemptyDataFields] = React.useState({  
+  const emptyDataFields = {  
       "UserId": null,
       "FirstName": null,
       "LastName": null,
@@ -94,7 +94,7 @@ export default function UsersTable(props) {
       "LocationId": null,
       "City": null,
       "Country": null,
-    })
+    };
   const handleClickOpen = () => {
     setOpen(true);
   };

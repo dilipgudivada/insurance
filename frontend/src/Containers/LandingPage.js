@@ -2,12 +2,15 @@ import React from 'react';
 import SideMenu from './SideMenu';
 import MainTable from '../Components/MainTable';
 import UsersTable from '../Components/UsersTable';
+import Report from './ReportPage';
 import { GET_USERS,GET_INSURANCES} from "../Constants/urlConstants";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getLocations } from '../Redux/Actions/LocationActions';
 
 export default function LandingPage(userDetails) {
   const dispatch = useDispatch();
+  const loginUserReducer = useSelector(state => state.loginUserReducer)
+
   const style = {
     height: "100%",
     width:"100%",
@@ -20,7 +23,6 @@ export default function LandingPage(userDetails) {
   };
   const [menu, setMenu] = React.useState("Insurance");
   const [user, setuserDetails] = React.useState({});
-  const [updatePage, setUpdatePage] = React.useState(false);
   const [allUsers,setallUsers] = React.useState({
     allUsers: [],
     usersErrorMessage: "",
@@ -35,11 +37,19 @@ export default function LandingPage(userDetails) {
 
   React.useEffect(() => {
     setuserDetails(JSON.parse(userDetails.userDetails));
+    // eslint-disable-next-line
+    getInsurences();
+    // eslint-disable-next-line
+    getUsers();
+    // eslint-disable-next-line
+    dispatch(getLocations());
+    // eslint-disable-next-line
+  },[userDetails]);
+
+  const handleCallRequiredApis = () => {
     getInsurences();
     getUsers();
-    dispatch(getLocations());
-    
-  }, [updatePage]);
+  }
 
   const getUsers = () => {
     var url = GET_USERS;
@@ -66,7 +76,13 @@ export default function LandingPage(userDetails) {
 
   //get All insurences
   const getInsurences = () => {
-    var url = GET_INSURANCES;
+
+    const LocationId = loginUserReducer?.data?.LocationId;
+    const RoleId = loginUserReducer?.data?.RoleId;
+    let url = GET_INSURANCES;
+    if(Number(RoleId) === 2) {
+      url = url + `/${LocationId}`;
+    }
   
     fetch(url, {
       method: "GET",
@@ -90,19 +106,27 @@ export default function LandingPage(userDetails) {
 
 
   const handleMenu = (value) => {
-    
-    if(value.toUpperCase() ==="INSURANCE"){
-      setMenu("Insurance")
-    }
-    else{
-      setMenu("USERS")
-    }
+   setMenu(value);
   };
+
+  let renderComponent = [];
+
+  switch(menu.toUpperCase()) {
+    case "USERS":
+      renderComponent = <UsersTable setUpdatePage={handleCallRequiredApis}  user={user} allUsers={allUsers}/>;
+      break;
+      case "REPORT":
+      renderComponent = <Report allInsurances={allInsurances}/>;
+      break;
+      default:
+      renderComponent =  <MainTable  setUpdatePage={handleCallRequiredApis} user={user} allInsurances={allInsurances}/>;
+
+    }
 
   return (
     <div style={style}>
-        <SideMenu user={user} handleMenu={handleMenu}   heading ={menu}/>
-        {menu.toUpperCase()==="USERS"?<UsersTable setUpdatePage={setUpdatePage} updatePage={updatePage} user={user} allUsers={allUsers}/>:<MainTable  setUpdatePage={setUpdatePage} updatePage={updatePage} user={user} allInsurances={allInsurances}/>}
+        <SideMenu user={user} handleMenu={handleMenu} heading ={menu}/>
+        {renderComponent}
     </div>
   );
 }

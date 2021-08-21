@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${TopDentists2020Opener})`,
     'background-repeat': 'no-repeat',
     'background-size': '100vh 100vh',
-    'background-size': 'cover'
 },
 heading:{
   top: "37%",
@@ -42,7 +41,7 @@ export default function SigninPage() {
   const handleClickOpen = (value) => {
 
     setOpen(true);
-    if(value==signin){
+    if(value===signin){
       setSignin(true)
     }
     else{
@@ -51,11 +50,6 @@ export default function SigninPage() {
   };
 
   const classes = useStyles();
-const style={
-  underline:{
-    top:"30%"
-  }
-}
   return (
     <div className={classes.singinContainer}>
     <Container maxWidth="xs" >

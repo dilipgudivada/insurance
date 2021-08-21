@@ -75,7 +75,7 @@ export default function MainTable(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [open, setOpen] = React.useState(false);
   const [isRowSelected, setisRowSelected] = React.useState(false);
-  const [emptyDataFields, setemptyDataFields] = React.useState({
+  const emptyDataFields ={
     "PatientID": null,
     "GuestName": null,
     "GuestDOB": null,
@@ -194,8 +194,8 @@ export default function MainTable(props) {
     "D4910PerioMaintAddEither": null,
     "D4910PerioMaintLastDos": null,
     "DropDownValues": null
-  }
-);
+  };
+  
   const [selectedRow, setselectedRow] = React.useState({});
   const rows = props.allInsurances.allInsurances
   const handleChangePage = (event, newPage) => {
